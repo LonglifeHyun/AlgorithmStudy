@@ -10,6 +10,18 @@ typedef pair<coordinate,coordinate> rectangle;
 
 typedef vector<int> row;
 
+void print_paper(const vector<row>& paper)
+{
+	/* Debugging */
+	cout << "------------paper------------" << endl << endl;
+	for(int i=0;i<paper.size();++i){
+		for(int j=0;j<paper[i].size();++j)
+			cout << paper[i][j] << '\t';
+		cout << endl << endl;
+	}	
+	cout << "-----------------------------" << endl;
+}
+
 bool is_rectangle(vector<row>& paper, int i, int j)
 {
 	return paper[i][j] == -1;
@@ -57,6 +69,7 @@ void look_up(vector<row>& paper, int i, int j, vector<int>& area){
 }
 
 void follow_min(vector<row>& paper,int i,int j,int max_val,int min_val){
+	print_paper(paper);
 	
 	if(!is_top_edge(i) && !is_left_edge(j)){
 		if(paper[i-1][j]==max_val){		
@@ -244,21 +257,12 @@ int main(void)
 			for(int k=new_list_rect[i].first.second;k<=new_list_rect[i].second.second;++k)
 				paper[j][k] = -1;
 	
+	print_paper(paper);
 
-	/* Debugging */
-	for(int i=0;i<paper.size();++i){
-		for(int j=0;j<paper[i].size();++j)
-			cout << paper[i][j] << "    ";
-		cout << endl;
-	}
 
 	find_area(paper, area);
 
-	for(int i=0;i<paper.size();++i){
-		for(int j=0;j<paper[i].size();++j)
-			cout << paper[i][j] << "    ";
-		cout << endl;
-	}
+	print_paper(paper);
 	
 	sort(area.begin(), area.end());
 	cout << "area : ";
